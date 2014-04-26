@@ -33,7 +33,7 @@
 	});
 
 	Crafty.c('Player', {
-		init: function() {
+		init: function () {
 			this.requires('Actor, Fourway, Collision');
 			this.color('red');
 			this.fourway(1);
@@ -49,5 +49,22 @@
 				this.y -= this._movement.y;
 			}
 		}
-	})
+	});
+
+	Crafty.c('Artefact', {
+		init: function () {
+			this.requires('2D, Grid, Canvas, Collision');
+			this.registerOnHit();
+		},
+
+		registerOnHit : function () {
+			this.onHit('Player', this.scan);
+		},
+
+		scan : function() {
+			this.unbind('EnterFrame'); 
+			this.addComponent('Color'); 
+			this.color('blue');});
+		}
+	});
 }());

@@ -10,7 +10,7 @@ var Game = (function () {
 		var digMap = dig.createDigMap(gameGrid);
 
 		var player = Crafty.e('Player').onGrid(gameGrid)
-			.at(gameGrid.gridWidth/4, gameGrid.gridHeight/2);
+			.at(gameGrid.gridWidth/2, gameGrid.gridHeight/2);
 
 	};
 
