@@ -6,10 +6,10 @@
 		init: function () {
 		},
 
-		onMap: function (map){
+		onGrid: function (grid){
 			this.attr({
-				w: map.blockWidth,
-				h: map.blockHeight,
+				w: grid.blockWidth,
+				h: grid.blockHeight,
 			});
 			return this;
 		},
@@ -24,4 +24,30 @@
 			}
 		}
 	});
+
+	// A canvas component that can be drawn on a grid
+	Crafty.c('Actor', {
+		init: function () {
+			this.requires('2D, Canvas, Grid, Color');
+		}
+	});
+
+	Crafty.c('Player', {
+		init: function() {
+			this.requires('Actor, Fourway, Collision');
+			this.color('red');
+			this.fourway(1);
+			this.stopOnSolids();
+		},
+		stopOnSolids: function () {
+			this.onHit('Solid', this.stopMovement);
+		},
+		stopMovement: function () {
+			this._speed = 0;
+			if (this._movement) { 
+				this.x -= this._movement.x;
+				this.y -= this._movement.y;
+			}
+		}
+	})
 }());
