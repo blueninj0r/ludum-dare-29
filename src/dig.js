@@ -1,13 +1,4 @@
 var dig = (function () {
-
-	Crafty.c('Fence', {
-		init: function () {
-			this.requires('Actor, Solid');
-			this.color('rgb(198, 125, 42)');
-		}
-	});
-
-
 	var hideArtefacts = function (grid) {
 		var i, j;
 		for (i = 0; i < grid.gridWidth; i++){

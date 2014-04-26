@@ -32,12 +32,20 @@
 		}
 	});
 
+	Crafty.c('Fence', {
+		init: function () {
+			this.requires('Actor, Solid');
+			this.color('rgb(198, 125, 42)');
+		}
+	});
+
 	Crafty.c('Player', {
 		init: function () {
 			this.requires('Actor, Fourway, Collision');
 			this.color('red');
 			this.fourway(1);
 			this.stopOnSolids();
+			this.attr({score: 0, battery: 100});
 		},
 		stopOnSolids: function () {
 			this.onHit('Solid', this.stopMovement);
@@ -64,7 +72,8 @@
 		scan : function() {
 			this.unbind('EnterFrame'); 
 			this.addComponent('Color'); 
-			this.color('blue');});
+			this.color('blue');
+			Crafty.trigger("Scanned");
 		}
 	});
 }());

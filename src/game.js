@@ -1,9 +1,8 @@
 var Game = (function () {
 	var gameMap;
 
-
 	var start = function() {
-		Crafty.init(1200, 600);
+		Crafty.init(1200, 700);
 		Crafty.background('green');
 
 		var gameGrid = grid.createGrid(1200, 600);
@@ -12,7 +11,18 @@ var Game = (function () {
 		var player = Crafty.e('Player').onGrid(gameGrid)
 			.at(gameGrid.gridWidth/2, gameGrid.gridHeight/2);
 
+		var score = Crafty.e("2D, DOM, Text")
+			.text("Score: 0")
+			.attr({x: 20, y: Crafty.viewport.height - 50, w: 200, h:50})
+			.css({color: "#fff"})
+			.textFont({size: "large"});
+
+		var battery = Crafty.e("2D, DOM, Text")
+			.text("Remaining Power: 0")
+			.attr({x: 20, y: Crafty.viewport.height - 75, w: 200, h:50})
+			.css({color: "#fff"})
+			.textFont({size: "large"});
 	};
 
-	return { start: start }
+	return { start: start };
 }());
