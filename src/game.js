@@ -15,13 +15,15 @@ var Game = (function () {
 			.text("Score: 0")
 			.attr({x: 20, y: Crafty.viewport.height - 50, w: 200, h:50})
 			.css({color: "#fff"})
-			.textFont({size: "large"});
+			.textFont({size: "large"})
+			.bind("IncScore", function (score) { this.text("Score: " + score);});		
 
 		var battery = Crafty.e("2D, DOM, Text")
 			.text("Remaining Power: 0")
 			.attr({x: 20, y: Crafty.viewport.height - 75, w: 200, h:50})
 			.css({color: "#fff"})
-			.textFont({size: "large"});
+			.textFont({size: "large"})
+			.bind("DecBattery", function (power) { this.text("Remaining Power: " + Math.round(power));});
 	};
 
 	return { start: start };

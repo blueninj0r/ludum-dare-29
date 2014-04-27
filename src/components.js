@@ -45,7 +45,9 @@
 			this.color('red');
 			this.fourway(1);
 			this.stopOnSolids();
-			this.attr({score: 0, battery: 100});
+			this.updateScoreOnArtefact();
+			this.updateBatteryOnMoved();
+			this.attr({score: 0, battery: 100, distance:0});
 		},
 		stopOnSolids: function () {
 			this.onHit('Solid', this.stopMovement);
@@ -56,7 +58,31 @@
 				this.x -= this._movement.x;
 				this.y -= this._movement.y;
 			}
-		}
+		},
+		updateScoreOnArtefact : function ()
+		 {
+		 	this.bind("Scanned", this.incScore);
+		 },
+
+		 incScore : function () {
+		 	this.score++;
+		 	Crafty.trigger("IncScore", this.score);
+		 },
+
+		 updateBatteryOnMoved : function () {
+		 	this.bind("Moved", this.decBattery);
+		 },
+
+		 decBattery : function () {
+		 	this.distance++;
+		 	var diff = (this.distance / 5000) * 100;
+		 	this.battery = 100 - diff;;
+		 	Crafty.trigger("DecBattery", this.battery);
+
+		 	if (this.battery == 0){
+		 		Crafty.trigger("FlatBattery");
+		 	}
+		 }
 	});
 
 	Crafty.c('Artefact', {
@@ -76,4 +102,6 @@
 			Crafty.trigger("Scanned");
 		}
 	});
+
+	Crafty.c('Scanned');
 }());
