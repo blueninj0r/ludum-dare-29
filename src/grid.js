@@ -1,4 +1,4 @@
-var map = (function () {
+var grid = (function () {
 	var gridWidth;
 	var gridHeight;
 	var blockHeight;
@@ -13,14 +13,17 @@ var map = (function () {
 	};
 
 	var isEdgeCoord = function (x, y) {
-		return x === 0 || y === 0 || x === (gridWidth - 1) || y === (gridHeight - 1);
+		return x === 0
+			|| y === 0
+			|| x === (gridWidth - 1) 
+			|| y === (gridHeight - 1);
 	};
 
-	var createMap = function (w, h) {
+	var createGrid = function (w, h) {
 		blockHeight = 20;
 		blockWidth = 20;
-		gridWidth = w;
-		gridHeight = h;
+		gridWidth = w/blockWidth;
+		gridHeight = h/blockHeight;
 
 		return {
 			width: width,
@@ -29,11 +32,11 @@ var map = (function () {
 			blockWidth: blockWidth,
 			blockHeight: blockHeight,
 			gridWidth: gridWidth,
-			gridHeight: gridHeights
+			gridHeight: gridHeight
 		};
 	};
 
 	return {
-		createMap : createMap
+		createGrid : createGrid
 	};	
 }());
