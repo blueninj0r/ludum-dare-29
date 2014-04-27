@@ -104,4 +104,13 @@
 	});
 
 	Crafty.c('Scanned');
+
+	Crafty.c("WelcomeText", {
+		init: function() {
+			this.requires("2D, DOM, Text")
+				.attr({x: 300, w: 600, h:300})
+				.css({color: "#fff"})
+				.textFont({size: "large"});
+		}
+	});
 }());
