@@ -24,11 +24,13 @@ var Game = (function () {
 
 		Crafty.e("WelcomeText")
 			.attr({y: Crafty.viewport.height * .8})
-			.text("Press any key to continue.")
-			.bind("KeyDown", function () { Crafty.scene("Main");});
+			.text("Press space key to continue.")
+			.bind("KeyDown", function (e) { if (e.key === Crafty.keys.SPACE) Crafty.scene("Main");});
 	}
 
 	var setupMainScene = function () {
+		Crafty.audio.add("theme", "sounds/time_team_theme.mp3");
+
 		var gameGrid = grid.createGrid(1200, 600);
 		var digMap = dig.createDigMap(gameGrid);
 
@@ -48,6 +50,8 @@ var Game = (function () {
 			.css({color: "#fff"})
 			.textFont({size: "large"})
 			.bind("DecBattery", function (power) { this.text("Remaining Power: " + Math.round(power));});
+
+		Crafty.audio.play("theme", -1);
 	};
 
 	var start = function() {
@@ -63,6 +67,8 @@ var Game = (function () {
 		});
 
 		Crafty.scene("Finish", function () {
+			Crafty.audio.stop("theme");
+
 			var scoreText = "Your final score was " + finalScore + ".";
 			var messageText = "This is great. You've managed to locate enough dig sites to fill a whole episode of Time Team!";
 
