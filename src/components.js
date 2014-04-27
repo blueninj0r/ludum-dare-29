@@ -76,11 +76,11 @@
 		 decBattery : function () {
 		 	this.distance++;
 		 	var diff = (this.distance / 5000) * 100;
-		 	this.battery = 100 - diff;;
+		 	this.battery = 100 - (diff * 2);
 		 	Crafty.trigger("DecBattery", this.battery);
 
-		 	if (this.battery == 0){
-		 		Crafty.trigger("FlatBattery");
+		 	if (this.battery < 1){
+		 		Crafty.trigger("FlatBattery", this.score);
 		 	}
 		 }
 	});
